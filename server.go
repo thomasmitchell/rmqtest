@@ -24,7 +24,7 @@ func StartServer(conf *ServerConfig) error {
 	messageAPI := NewAPIMessage(queue)
 	router.Handle("/messages", messageAPI).Methods("GET", "POST")
 
-	return http.ListenAndServe(fmt.Sprintf(":%s", conf.Port), router)
+	return http.ListenAndServe(fmt.Sprintf(":%d", conf.Port), router)
 }
 
 type APIMessage struct {
