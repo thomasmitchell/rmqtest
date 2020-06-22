@@ -1,0 +1,14 @@
+# github.com/gorilla/mux v1.7.4
+## explicit
+github.com/gorilla/mux
+# github.com/jhunt/go-ansi v0.0.0-20181127194324-5fd839f108b6
+## explicit
+github.com/jhunt/go-ansi
+# github.com/mattn/go-isatty v0.0.12
+## explicit
+github.com/mattn/go-isatty
+# github.com/streadway/amqp v1.0.0
+## explicit
+github.com/streadway/amqp
+# golang.org/x/sys v0.0.0-20200116001909-b77594299b42
+golang.org/x/sys/unix

@@ -1,0 +1,4 @@
+applications:
+- name: rmqtest
+  env:
+    RMQ_SKIP_VERIFY: "true"
