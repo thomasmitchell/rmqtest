@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto/tls"
 	"fmt"
 	"os"
 	"sync"
@@ -20,9 +21,17 @@ type Queue struct {
 	lock sync.Mutex
 }
 
-func NewQueue(connect string) (*Queue, error) {
+func NewQueue(connect string, skipVerify bool) (*Queue, error) {
 	const queueName = "rmq-test-app-queue"
-	conn, err := amqp.Dial(connect)
+
+	//amqp.DialTLS will Dial either TLS or non-TLS depending on the scheme in the
+	// connection string (amqp vs amqps). The TLS part just allows us to provide
+	// a TLS config, in the case of actually dialing a TLS connection
+	conn, err := amqp.DialTLS(connect,
+		&tls.Config{
+			InsecureSkipVerify: skipVerify,
+		},
+	)
 	if err != nil {
 		return nil, err
 	}

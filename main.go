@@ -3,6 +3,7 @@ package main
 import (
 	"os"
 	"strconv"
+	"strings"
 
 	"github.com/jhunt/go-ansi"
 )
@@ -23,9 +24,16 @@ func main() {
 		bailWith("Must provide RABBIT_URI envvar")
 	}
 
+	rmqSkipVerify := false
+	rmqSkipVerifyStr := strings.ToLower(os.Getenv("RMQ_SKIP_VERIFY"))
+	if rmqSkipVerifyStr != "" && rmqSkipVerifyStr != "no" && rmqSkipVerifyStr != "false" {
+		rmqSkipVerify = true
+	}
+
 	err = StartServer(&ServerConfig{
 		Port:                     uint16(port),
 		RabbitMQConnectionString: rabbitURI,
+		RMQSkipVerify:            rmqSkipVerify,
 	})
 	if err != nil {
 		bailWith(err.Error())

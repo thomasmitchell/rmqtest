@@ -12,10 +12,11 @@ import (
 type ServerConfig struct {
 	Port                     uint16
 	RabbitMQConnectionString string
+	RMQSkipVerify            bool
 }
 
 func StartServer(conf *ServerConfig) error {
-	queue, err := NewQueue(conf.RabbitMQConnectionString)
+	queue, err := NewQueue(conf.RabbitMQConnectionString, conf.RMQSkipVerify)
 	if err != nil {
 		return fmt.Errorf("Error setting up queue: %s", err.Error())
 	}
